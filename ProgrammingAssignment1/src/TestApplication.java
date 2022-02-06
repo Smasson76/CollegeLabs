@@ -164,19 +164,42 @@ public class TestApplication {
 	//When input = 5
 	//This function deletes previously created student from the list
 	public static void deleteStudent(ArrayList<Student> studentList, Student student) {
+		System.out.println("--STUDENT ROSTER--");
+		Scanner scnr = new Scanner(System.in);
 		for (int i = 0; i < studentList.size(); i++) {
-            if (studentList.get(i).getStudentName() == student.getStudentName()) {
-                studentList.remove(studentList.get(i));
-                break;
+            System.out.println(studentList.get(i).getStudentName() + "   ID: " + studentList.get(i).getidNumber());
+        }
+		
+		int choice;
+		int i;
+		do {
+			System.out.println("Which student would you like to Delete? (Enter the students current ID number)");
+			choice = scnr.nextInt();
+			for (i = 0; i < studentList.size(); i++) {
+				if (choice == studentList.get(i).getidNumber()) {
+					break;
+				}
+	        }
+			if (choice != studentList.get(i).getidNumber()) {
+				System.out.println("Invalid Input. Please Try Again!");
+				System.out.println("");
+			}
+		} while(choice != studentList.get(i).getidNumber());
+		
+		int z;
+		for (z = 0; z < studentList.size(); z++) {
+            if (choice == studentList.get(z).getidNumber()) {
+            	studentList.remove(studentList.get(i));
+        		System.out.println("");
+        		System.out.println("Student Successfully Removed.\n");
             }
         }
-		System.out.println("Student Successfully Deleted");
-		System.out.println("");
 		displayMenu(studentList, student);
 	}
 	
 	//When input = 6
-	//This function (does nothing as of yet)
+	//This function displays all users
+	//Allows user to enter the id number to pick which student to edit
 	public static void updateStudentInfo(ArrayList<Student> studentList, Student student) {
 		System.out.println("--STUDENT ROSTER--");
 		Scanner scnr = new Scanner(System.in);
@@ -201,7 +224,7 @@ public class TestApplication {
 		} while(choice != studentList.get(i).getidNumber());
 		
 		int z;
-		for (z = 0; z < studentList.size(); z++) {
+		for (z = 0; z < studentList.size(); z++) {						//For-loop that iterates through the arraylist to find the same choice as user input
             if (choice == studentList.get(z).getidNumber()) {
             	String studentName, className;
         		int idNumber;
